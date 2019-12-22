@@ -7,13 +7,15 @@ public class Player {
     private static int next_id = 0;
     private int id;
     private String name;
+    private Grid grid;
     private Rule rule;
     
     // Methods.
     
-    public Player(String name) {
+    public Player(String name, Grid grid) {
         this.id = next_id;
         this.name = name;
+        this.grid = grid;
         
         next_id++;
     }
@@ -30,13 +32,29 @@ public class Player {
         return this.name;
     }
     
+    public Grid getGrid() {
+        return this.grid;
+    }
+    
     public Rule getRule() {
         return this.rule;
     }
     
-    public int getScore(Grid grid) {
-        // WIP: Compute score.
-        
-        return 0;
+    public void setRule(Rule new_rule) {
+        this.rule = new_rule;
+    }
+    
+    public int getScore() {
+        // WIP
+        return -1;
+    }
+    
+    public void nextTurn() {
+        Grid previous_states = this.grid.clone();
+        for (int i = 0; i < this.grid.getHeight(); i++) {
+            for (int j = 0; j < this.grid.getWidth(); j++) {
+                this.grid.getAutomata()[i][j].nextTurn(previous_states, this);
+            }
+        }
     }
 }

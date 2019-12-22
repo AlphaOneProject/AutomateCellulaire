@@ -34,8 +34,8 @@ public class Automaton {
         return this.age;
     }
 
-    public void nextTurn(Grid grid) {
+    public void nextTurn(Grid grid, Player owner) {
         this.age++;
-        this.state = grid.getOwner().getRule().applyRule(grid, this);
+        this.state = owner.getRule().applyRule(grid, this);
     }
 }
