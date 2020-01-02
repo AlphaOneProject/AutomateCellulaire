@@ -23,10 +23,7 @@ public class PlayerManager {
     
     public int add(String name) {
         int new_id = Player.getNextId();
-        /*
-         * WIP
-        this.players.add(new Player(name));
-        */
+        this.players.add(new Player(name, Game.getInstance().getWidth(), Game.getInstance().getHeight()));
         return new_id;
     }
     

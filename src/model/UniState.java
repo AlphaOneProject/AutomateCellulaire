@@ -1,5 +1,7 @@
 package model;
 
+import control.Game;
+
 public class UniState implements Rule {
     
     // Attributes.
@@ -9,6 +11,12 @@ public class UniState implements Rule {
     private Neighborhood neighborhood;
     
     // Methods.
+    
+    public UniState() {
+        this.match_state = State.ALIVE;
+        this.results = new State[] {State.DEAD, State.ALIVE, State.ALIVE, State.DEAD, State.DEAD};
+        this.neighborhood = new Neighborhood();
+    }
     
     public UniState(State match_state, State[] results, Neighborhood neighborhood) {
         this.match_state = match_state;
@@ -24,7 +32,7 @@ public class UniState implements Rule {
     public State applyRule(Grid grid, Automaton automaton) {
         int matching_cells = 0;
         for(int[] delta : neighborhood.getNeighbors()) {
-            if(grid.get(automaton.getX() + delta[0], automaton.getY() + delta[1]).getState() == this.match_state) matching_cells++;
+            if(Game.getInstance().getExtension().get(grid, automaton.getX() + delta[0], automaton.getY() + delta[1]).getState() == this.match_state) matching_cells++;
         }
         return this.results[matching_cells];
     }

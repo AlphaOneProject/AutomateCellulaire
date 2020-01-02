@@ -12,10 +12,10 @@ public class Player {
     
     // Methods.
     
-    public Player(String name, Grid grid) {
+    public Player(String name, int width, int height) {
         this.id = next_id;
         this.name = name;
-        this.grid = grid;
+        this.grid = new Grid(width, height);
         
         next_id++;
     }
