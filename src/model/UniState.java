@@ -36,7 +36,8 @@ public class UniState implements Rule {
     public State applyRule(Grid grid, Automaton automaton) {
         int matching_cells = 0;
         for(int[] delta : neighborhood.getNeighbors()) {
-            if(Game.getInstance().getExtension().get(grid, automaton.getX() + delta[0], automaton.getY() + delta[1]).getState() == this.match_state) matching_cells++;
+            if(Game.getInstance().getExtension().get(grid, automaton.getX() + delta[0],
+               automaton.getY() + delta[1]).getState() == this.match_state) { matching_cells++; }
         }
         return this.results[matching_cells];
     }
