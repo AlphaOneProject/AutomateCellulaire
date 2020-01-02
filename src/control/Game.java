@@ -29,6 +29,7 @@ public class Game {
     
     public void setWidth(int new_width) {
         this.width = new_width;
+        PlayerManager.getInstance().updateGrid();
     }
 
     public int getWidth() {
@@ -37,6 +38,7 @@ public class Game {
 
     public void setHeight(int new_height) {
         this.height = new_height;
+        PlayerManager.getInstance().updateGrid();
     }
 
     public int getHeight() {
@@ -47,7 +49,12 @@ public class Game {
         return this.extension;
     }
     
-    public void setExtension(Extension new_extension) {
-        this.extension = new_extension;
+    public void setExtension(String extension_type, Object argument) {
+        this.extension = ExtensionFactory.getInstance().getExtension(extension_type, argument);
+    }
+    
+    public void start() {
+        // WIP
+        // Will start the initial view & let the user customize their parameters.
     }
 }

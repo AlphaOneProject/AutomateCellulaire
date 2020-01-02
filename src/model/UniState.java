@@ -27,6 +27,10 @@ public class UniState implements Rule {
     public Neighborhood getNeighborhood() {
         return this.neighborhood;
     }
+    
+    public void setNeighborhood(Neighborhood new_neighborhood) {
+        this.neighborhood = new_neighborhood;
+    }
 
     @Override
     public State applyRule(Grid grid, Automaton automaton) {

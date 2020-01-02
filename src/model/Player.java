@@ -16,6 +16,7 @@ public class Player {
         this.id = next_id;
         this.name = name;
         this.grid = new Grid(width, height);
+        this.rule = new UniState();
         
         next_id++;
     }
@@ -34,6 +35,10 @@ public class Player {
     
     public Grid getGrid() {
         return this.grid;
+    }
+    
+    public void setGridSize(int new_width, int new_height) {
+        this.grid = new Grid(new_width, new_height);
     }
     
     public Rule getRule() {

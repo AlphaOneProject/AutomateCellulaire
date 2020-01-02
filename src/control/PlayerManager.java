@@ -1,7 +1,10 @@
 package control;
 
 import java.util.ArrayList;
+
+import model.Neighborhood;
 import model.Player;
+import model.Rule;
 
 public class PlayerManager {
     
@@ -40,7 +43,7 @@ public class PlayerManager {
         else throw new IllegalArgumentException("Remove Player: Player n°" + id + " does not exists.");
     }
     
-    public Player get(int id) {
+    private Player get(int id) {
         boolean found = false;
         int cursor = 0;
         while (!found && cursor < players.size()) {
@@ -51,5 +54,23 @@ public class PlayerManager {
         }
         if (found) return players.get(cursor);
         else throw new IllegalArgumentException("Get Player: Player n°" + id + " does not exists.");
+    }
+    
+    public void setPlayerRule(int id, Rule new_rule) {
+        // WIP
+        // Will trigger another class responsible for rules' management.
+        this.get(id).setRule(new_rule);
+    }
+    
+    public void setPlayerNeighborhood(int id, Neighborhood new_neighborhood) {
+        // WIP
+        // Will trigger another class responsible for neighborhoods' management.
+        this.get(id).getRule().setNeighborhood(new_neighborhood);
+    }
+    
+    public void updateGrid() {
+        for (Player player : this.players) {
+            player.setGridSize(Game.getInstance().getWidth(), Game.getInstance().getHeight());
+        }
     }
 }
