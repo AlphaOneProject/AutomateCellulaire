@@ -1,6 +1,7 @@
 package test;
 
 import control.Game;
+import view.*;
 
 public class main {
     
