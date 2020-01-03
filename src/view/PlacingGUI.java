@@ -28,9 +28,14 @@ public class PlacingGUI extends JFrame {
 
     private int cellsLeft;
 
-    public PlacingGUI(int width, int height) {
+    public PlacingGUI(int width, int height, int cellsLeft) {
 
         super("Placez vos premières cellules");
+
+        this.width = width;
+        this.height = height;
+        this.cellsLeft = cellsLeft;
+
         units = new JButton[width][height];
         getContentPane().setLayout(new GridLayout(width, height));
 
@@ -41,6 +46,7 @@ public class PlacingGUI extends JFrame {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 units[i][j] = new JButton();
+                ((JButton)units[i][j]).setBackground(Color.WHITE);
                 units[i][j].addActionListener( e -> unitClickHandler(e) );
                 getContentPane().add(units[i][j]);
             }
@@ -50,7 +56,18 @@ public class PlacingGUI extends JFrame {
     }
 
     public void unitClickHandler(ActionEvent e) {
+        System.out.println(this.cellsLeft);
         JButton btn = (JButton)e.getSource();
-        btn.setBackground(Color.BLACK);
+        
+        if (btn.getBackground().equals(Color.BLACK)) {
+            btn.setBackground(Color.WHITE);
+            this.cellsLeft++;
+        } else {
+            if (this.cellsLeft > 0) {
+                btn.setBackground(Color.BLACK);
+                this.cellsLeft--;
+            }  
+        }
+        getContentPane().invalidate();
     }
 }
