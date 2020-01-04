@@ -2,6 +2,8 @@ package control;
 
 import model.Extension;
 
+import view.PlacingGUI;
+
 public class Game {
     
     // Attributes.
@@ -56,5 +58,6 @@ public class Game {
     public void start() {
         // WIP
         // Will start the initial view & let the user customize their parameters.
+        PlacingGUI g = new PlacingGUI(10, 10, 5);
     }
 }
