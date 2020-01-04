@@ -57,15 +57,7 @@ public class PlayerManager {
     }
     
     public void setPlayerRule(int id, Rule new_rule) {
-        // WIP
-        // Will trigger another class responsible for rules' management.
         this.get(id).setRule(new_rule);
-    }
-    
-    public void setPlayerNeighborhood(int id, Neighborhood new_neighborhood) {
-        // WIP
-        // Will trigger another class responsible for neighborhoods' management.
-        this.get(id).getRule().setNeighborhood(new_neighborhood);
     }
     
     public void updateGrid() {
