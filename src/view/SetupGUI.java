@@ -74,18 +74,19 @@ public class SetupGUI extends JFrame {
         jpNbStartCells.add(spinnerNbStartCells);
 
         JPanel jpNbTurns = new JPanel(new FlowLayout());
-        jpNbTurns.add(new JLabel("Nombre de joueurs :"));
+        jpNbTurns.add(new JLabel("Nombre de tours :"));
         JSpinner spinnerNbTurns = new JSpinner(new SpinnerNumberModel(1, 0, 10000, 1));
         jpNbTurns.add(spinnerNbTurns);
 
         JButton btnValidate = new JButton("Valider");
+        // btnValidate.addActionListener();
 
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(jpGridSize);
         content.add(jpNbPlayers);
         content.add(jpNbStartCells);
         content.add(jpNbTurns);
-        content.setBackground(Color.BLACK);
+        content.add(btnValidate);
         getContentPane().add(content);
 
         setSize(500, 500);
