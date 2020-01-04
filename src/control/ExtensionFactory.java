@@ -44,7 +44,7 @@ public class ExtensionFactory {
             new_extension = new Constant(arg_state);
             break;
         default:
-            throw new IllegalArgumentException("Get Extension: Invalid extension_type provided: \"" + extension_type +
+            throw new IllegalArgumentException("Get Extension: Invalid extension type provided: \"" + extension_type +
                                                "\"");
         }
 
