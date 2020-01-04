@@ -1,11 +1,14 @@
 package view;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.*;
 
 /**
@@ -14,7 +17,7 @@ import java.awt.event.*;
 
 /**
  * TODO : Retourner la liste des cellules choisies
- * 
+ * mettre en oeuvre les relations avec le modèle et le controleur
  */
 public class PlacingGUI extends JFrame {
 
@@ -22,25 +25,25 @@ public class PlacingGUI extends JFrame {
 
     private JButton[][] units;
 
-    private int width;
-
-    private int height;
-
     private int cellsLeft;
+
+    private JLabel JLabelCellsLeft;
 
     public PlacingGUI(int width, int height, int cellsLeft) {
 
         super("Placez vos premières cellules");
 
-        this.width = width;
-        this.height = height;
         this.cellsLeft = cellsLeft;
 
         units = new JButton[width][height];
-        getContentPane().setLayout(new GridLayout(width, height));
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JPanel gridPanel = new JPanel(new GridLayout(width, height));
 
         setSize(width * 50, height * 50);
         setResizable(false);
+        setLocationRelativeTo(null);
+
+        topPanel.add(JLabelCellsLeft = new JLabel("Nombre de cellules restantes : " + this.cellsLeft));
 
         // Grid cells initialization
         for (int i = 0; i < width; i++) {
@@ -48,15 +51,18 @@ public class PlacingGUI extends JFrame {
                 units[i][j] = new JButton();
                 ((JButton)units[i][j]).setBackground(Color.WHITE);
                 units[i][j].addActionListener( e -> unitClickHandler(e) );
-                getContentPane().add(units[i][j]);
+                gridPanel.add(units[i][j]);
             }
         }
 
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(topPanel, BorderLayout.NORTH);
+        getContentPane().add(gridPanel, BorderLayout.CENTER);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
     public void unitClickHandler(ActionEvent e) {
-        System.out.println(this.cellsLeft);
         JButton btn = (JButton)e.getSource();
         
         if (btn.getBackground().equals(Color.BLACK)) {
@@ -68,6 +74,7 @@ public class PlacingGUI extends JFrame {
                 this.cellsLeft--;
             }  
         }
+        JLabelCellsLeft.setText("Nombre de cellules restantes : " + this.cellsLeft);
         getContentPane().invalidate();
     }
 }
