@@ -1,5 +1,7 @@
 package model;
 
+import control.Game;
+
 public class Player {
     
     // Attributes.
@@ -50,8 +52,13 @@ public class Player {
     }
     
     public int getScore() {
-        // WIP
-        return -1;
+        int score = 0;
+        for (int i = 0; i < this.grid.getWidth(); i++) {
+            for (int j = 0; j < this.grid.getHeight(); j++) {
+                if (Game.getInstance().getExtension().get(this.grid, i, j).getState() != State.DEAD) score++;
+            }
+        }
+        return score;
     }
     
     public void nextTurn() {
