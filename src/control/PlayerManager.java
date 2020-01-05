@@ -56,6 +56,10 @@ public class PlayerManager {
         else throw new IllegalArgumentException("Get Player: Player n°" + id + " does not exists.");
     }
     
+    public int getPlayerCount() {
+        return this.players.size();
+    }
+    
     public void setPlayerRule(int id, Rule new_rule) {
         this.get(id).setRule(new_rule);
     }
