@@ -12,7 +12,7 @@ public class PlayerManager {
     
     private static PlayerManager instance;
     private ArrayList<Player> players;
-    
+
     // Methods.
     
     private PlayerManager() {
@@ -40,7 +40,7 @@ public class PlayerManager {
             else cursor++;
         }
         if (found) players.remove(cursor);
-        else throw new IllegalArgumentException("Remove Player: Player n°" + id + " does not exists.");
+        else throw new IllegalArgumentException("Remove Player: Player nï¿½" + id + " does not exists.");
     }
     
     private Player get(int id) {
@@ -53,7 +53,7 @@ public class PlayerManager {
             else cursor++;
         }
         if (found) return players.get(cursor);
-        else throw new IllegalArgumentException("Get Player: Player n°" + id + " does not exists.");
+        else throw new IllegalArgumentException("Get Player: Player nï¿½" + id + " does not exists.");
     }
     
     public int getPlayerCount() {

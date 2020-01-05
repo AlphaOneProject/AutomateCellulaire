@@ -4,19 +4,15 @@ import control.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 
 import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.event.*;
-
-import java.util.ArrayList;
 
 /**
  * TODO : mettre en oeuvre les relations avec le modèle et les contrôleurs
@@ -28,11 +24,8 @@ public class SetupGUI extends JFrame {
      */
     private static final long serialVersionUID = 1285322896840177969L;
 
-    // private static PlayerManager playerManager = PlayerManager.getInstance();
-
     private int MAX_CELLS = 30;
-    private int MAX_PLAYERS = 2;
-    private String[] RULE_LIST = {"FRIEDKIN", "GAME OF LIFE"};
+    private int MAX_PLAYERS = 5;
     private Game gameInstance = Game.getInstance();
 
     public SetupGUI() {
@@ -60,11 +53,20 @@ public class SetupGUI extends JFrame {
         jpNbPlayers.add(new JLabel("Nombre de joueurs :"));
         JSpinner spinnerNbPlayers = new JSpinner(new SpinnerNumberModel(1, 0, MAX_PLAYERS, 1));
         jpNbPlayers.add(spinnerNbPlayers);
+        // JButton btnValidatePlayers = new JButton("Valider");
+        // jpNbPlayers.add(btnValidatePlayers);
 
-        // JPanel jpExtension = new JPanel(new FlowLayout());
-        // jpExtension.add(new JLabel("Méthode d'extension :"));
-        // jpExtension.add(new JComboBox<String>(EXT_LIST));
-        // TODO : Les extensions séléctionnées par les autres joueurs ne sont plus disponibles
+        // JPanel jpPlayersName = new JPanel();
+        // jpPlayersName.setLayout(new BoxLayout(jpPlayersName, BoxLayout.Y_AXIS));
+        // btnValidatePlayers.addActionListener(e -> {
+        //     for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
+        //         jpPlayersName.add(new JLabel("Nom du joueur :"));
+        //         JTextField jtfPlayer = new JTextField();
+        //         jpPlayersName.add(jtfPlayer);
+        //         JButton btnAddPlayer = new JButton("Ajouter");
+                
+        //     }
+        // });
 
         JPanel jpNbStartCells = new JPanel(new FlowLayout());
         jpNbStartCells.add(new JLabel("Nombre de cellules de départ"));
@@ -81,7 +83,10 @@ public class SetupGUI extends JFrame {
             gameInstance.setWidth( (int)spinnerWidth.getValue() );
             gameInstance.setHeight( (int)spinnerHeight.getValue() );
             gameInstance.setTurnNumber( (int)spinnerNbTurns.getValue() );
+            gameInstance.setStartingPlayers( (int)spinnerNbPlayers.getValue() );
             gameInstance.setStartCellsNumber( (int)spinnerNbStartCells.getValue() );
+            PlayerSetup playerSetup = new PlayerSetup();
+            setVisible(false);
         });
 
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));

@@ -14,6 +14,7 @@ public class Game {
     private int height;
     private Extension extension;
     private int start_cells_number;
+    private int startingPlayers;
     
     // Methods.
 
@@ -79,5 +80,13 @@ public class Game {
         // Will start the initial view & let the user customize their parameters.
         SetupGUI setup = new SetupGUI();
         // PlacingGUI g = new PlacingGUI(10, 10, 5);
+    }
+    
+    public void setStartingPlayers(int players) {
+        this.startingPlayers = players;
+    }
+
+    public int getStartingPlayers() {
+        return startingPlayers;
     }
 }
