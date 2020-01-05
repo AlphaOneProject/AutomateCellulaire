@@ -38,6 +38,20 @@ public class SetupGUI extends JFrame {
         JPanel content = new JPanel();
         content.setBounds(60, 60, 440, 440);
 
+        JPanel jpGridSize = new JPanel(new FlowLayout());
+
+        JPanel jpWidth = new JPanel(new FlowLayout());
+        jpWidth.add(new JLabel("Largeur de la grille :"));
+        JSpinner spinnerWidth = new JSpinner(new SpinnerNumberModel(1, 0, 1000, 1));
+        jpWidth.add(spinnerWidth);
+        jpGridSize.add(jpWidth);
+
+        JPanel jpHeight = new JPanel(new FlowLayout());
+        jpHeight.add(new JLabel("Hauteur de la grille :"));
+        JSpinner spinnerHeight = new JSpinner(new SpinnerNumberModel(1, 0, 1000, 1));
+        jpHeight.add(spinnerHeight);
+        jpGridSize.add(jpHeight);
+
         EXT_LIST.add("CONSTANT");
         EXT_LIST.add("PACMAN");
         EXT_LIST.add("PERIODICITY");
@@ -55,24 +69,24 @@ public class SetupGUI extends JFrame {
         // TODO : Les extensions séléctionnées par les autres joueurs ne sont plus disponibles
 
         JPanel jpNbStartCells = new JPanel(new FlowLayout());
-        jpNbPlayers.add(new JLabel("Nombre de joueurs :"));
+        jpNbStartCells.add(new JLabel("Nombre de cellules de départ"));
         JSpinner spinnerNbStartCells = new JSpinner(new SpinnerNumberModel(1, 0, MAX_CELLS, 1));
-        jpNbPlayers.add(spinnerNbStartCells);
+        jpNbStartCells.add(spinnerNbStartCells);
 
         JPanel jpNbTurns = new JPanel(new FlowLayout());
-        jpNbTurns.add(new JLabel("Nombre de joueurs :"));
+        jpNbTurns.add(new JLabel("Nombre de tours :"));
         JSpinner spinnerNbTurns = new JSpinner(new SpinnerNumberModel(1, 0, 10000, 1));
         jpNbTurns.add(spinnerNbTurns);
 
         JButton btnValidate = new JButton("Valider");
-        
+        // btnValidate.addActionListener();
 
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        content.setBounds(100, 100, 400, 400);
+        content.add(jpGridSize);
         content.add(jpNbPlayers);
         content.add(jpNbStartCells);
         content.add(jpNbTurns);
-        content.setBackground(Color.BLACK);
+        content.add(btnValidate);
         getContentPane().add(content);
 
         setSize(500, 500);

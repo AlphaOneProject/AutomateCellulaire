@@ -29,11 +29,23 @@ public class PlacingGUI extends JFrame {
 
     private JLabel JLabelCellsLeft;
 
+    private int width;
+
+    private int height;
+
+    /**
+     * Instanciates a grid GUI to select initial player cells
+     * @param width width of the grid
+     * @param height height of the grid
+     * @param cellsLeft number of initial cells allowed to be placed
+     */
     public PlacingGUI(int width, int height, int cellsLeft) {
 
         super("Placez vos premières cellules");
 
         this.cellsLeft = cellsLeft;
+        this.width = width;
+        this.height = height;
 
         units = new JButton[width][height];
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -54,6 +66,9 @@ public class PlacingGUI extends JFrame {
                 gridPanel.add(units[i][j]);
             }
         }
+
+        JButton btnValidate = new JButton("Valider");
+        btnValidate.addActionListener(e -> btnValidateClickHandler(e));
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(topPanel, BorderLayout.NORTH);
@@ -76,5 +91,26 @@ public class PlacingGUI extends JFrame {
         }
         JLabelCellsLeft.setText("Nombre de cellules restantes : " + this.cellsLeft);
         getContentPane().invalidate();
+    }
+
+    public void btnValidateClickHandler(ActionEvent e) {
+        JButton btn = (JButton)e.getSource();
+
+        // TODO : Donner le tableau getInitCells() 
+    }
+
+    public boolean[][] getInitCells() {
+        boolean[][] res = new boolean[this.width][this.height];
+        for (int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                if ( ((JButton)this.units[i][j]).getBackground().equals(Color.BLACK) ) {
+                    res[i][j] = true;
+                }
+                else {
+                    res[i][j] = false;
+                }
+            }
+        }
+        return res;
     }
 }
