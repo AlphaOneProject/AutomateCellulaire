@@ -16,7 +16,7 @@ public class Neighborhood {
         this.origin[1] = 1;
         this.size[0] = 3;
         this.size[1] = 3;
-        this.neighbors = new boolean[2][2];
+        this.neighbors = new boolean[3][3];
         this.clearNeighbors();
         
         this.neighbors[1][0] = true;
