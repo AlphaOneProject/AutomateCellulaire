@@ -27,7 +27,7 @@ public class Neighborhood {
         this.count = 4;
     }
     
-    public Neighborhood(int width, int height, boolean[][] selected_cells, int[] origin) {
+    public Neighborhood(boolean[][] selected_cells, int[] origin) {
         this.size[0] = selected_cells[0].length;
         this.size[1] = selected_cells.length;
         this.neighbors = selected_cells.clone();

@@ -26,7 +26,7 @@ public class RuleFactory {
         
         switch(rule_type) {
         case "unistate":
-            Neighborhood neighborhood = new Neighborhood(n_width, n_height, n_selected, n_origin);
+            Neighborhood neighborhood = new Neighborhood(n_selected, n_origin);
             new_rule = new UniState(match_state, results, neighborhood);
             break;
         default:
