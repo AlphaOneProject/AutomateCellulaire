@@ -1,6 +1,7 @@
 package view;
 
-import control.*;
+import control.Game;
+import control.PlayerManager;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,23 +22,17 @@ import java.util.ArrayList;
 /**
  * TODO : mettre en oeuvre les relations avec le modèle et les contrôleurs
  */
-public class SetupGUI extends JFrame {
+public class PlayerSetupGUI extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1285322896840177969L;
-
-    // private static PlayerManager playerManager = PlayerManager.getInstance();
-
-    private int MAX_CELLS = 30;
+    private static final long serialVersionUID = -7311347608273233951L;
+    private static PlayerManager playerManager = PlayerManager.getInstance();
     private int MAX_PLAYERS = 2;
     private String[] RULE_LIST = {"FRIEDKIN", "GAME OF LIFE"};
     private Game gameInstance = Game.getInstance();
 
-    public SetupGUI() {
+    public PlayerSetupGUI() {
 
-        super("Combats d'automates cellulaires");
+        super("Choix de l'automate");
 
         JPanel content = new JPanel();
         content.setBounds(60, 60, 440, 440);

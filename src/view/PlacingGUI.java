@@ -11,27 +11,31 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.event.*;
 
+import control.*;
+
 /**
  * GUI used to place the initial cells.
  */
 
 /**
- * TODO : Retourner la liste des cellules choisies
+ * TODO : 
+ * retourner la liste des cellules choisies
  * mettre en oeuvre les relations avec le modèle et le controleur
+ * alterner les joueurs
  */
 public class PlacingGUI extends JFrame {
 
+    // Attributes
+
     private static final long serialVersionUID = 1L;
-
     private JButton[][] units;
-
     private int cellsLeft;
-
     private JLabel JLabelCellsLeft;
-
     private int width;
-
     private int height;
+    private static PlayerManager playerManager = PlayerManager.getInstance();
+
+    // Methods
 
     /**
      * Instanciates a grid GUI to select initial player cells
@@ -39,21 +43,18 @@ public class PlacingGUI extends JFrame {
      * @param height height of the grid
      * @param cellsLeft number of initial cells allowed to be placed
      */
-    public PlacingGUI(int width, int height, int cellsLeft) {
+    public PlacingGUI(int width, int height, int startCellsNumber) {
 
         super("Placez vos premières cellules");
 
-        this.cellsLeft = cellsLeft;
+        this.cellsLeft = startCellsNumber;
         this.width = width;
         this.height = height;
 
         units = new JButton[width][height];
         JPanel topPanel = new JPanel(new BorderLayout());
-        JPanel gridPanel = new JPanel(new GridLayout(width, height));
+        JPanel gridPanel = new JPanel(new GridLayout(width, height));        
 
-        setSize(width * 50, height * 50);
-        setResizable(false);
-        setLocationRelativeTo(null);
 
         topPanel.add(JLabelCellsLeft = new JLabel("Nombre de cellules restantes : " + this.cellsLeft));
 
@@ -70,9 +71,15 @@ public class PlacingGUI extends JFrame {
         JButton btnValidate = new JButton("Valider");
         btnValidate.addActionListener(e -> btnValidateClickHandler(e));
 
+        // Panneaux
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(topPanel, BorderLayout.NORTH);
         getContentPane().add(gridPanel, BorderLayout.CENTER);
+
+        // Fenêtre
+        setSize(width * 50, height * 50);
+        setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
@@ -96,7 +103,7 @@ public class PlacingGUI extends JFrame {
     public void btnValidateClickHandler(ActionEvent e) {
         JButton btn = (JButton)e.getSource();
 
-        // TODO : Donner le tableau getInitCells() 
+        // TODO : Donner le tableau getInitCells() au controleur
     }
 
     public boolean[][] getInitCells() {
