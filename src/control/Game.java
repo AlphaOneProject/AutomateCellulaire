@@ -13,6 +13,7 @@ public class Game {
     private int width;
     private int height;
     private Extension extension;
+    private int start_cells_number;
     
     // Methods.
 
@@ -20,6 +21,8 @@ public class Game {
         this.turn_number = 0;
         this.width = 10;
         this.height = 10;
+        this.extension = ExtensionFactory.getInstance().getExtension("pacman", null);
+        this.start_cells_number = 1;
     }
     
     public static Game getInstance() {
@@ -53,6 +56,22 @@ public class Game {
     
     public void setExtension(String extension_type, Object argument) {
         this.extension = ExtensionFactory.getInstance().getExtension(extension_type, argument);
+    }
+    
+    public int getTurnNumber() {
+        return this.turn_number;
+    }
+    
+    public void setTurnNumber(int new_turn_number) {
+            this.turn_number = new_turn_number;
+     }
+
+    public int getStartCellsNumber() {
+        return start_cells_number;
+    }
+
+    public void setStartCellsNumber(int new_cells_number) {
+        this.start_cells_number = new_cells_number;
     }
     
     public void start() {
