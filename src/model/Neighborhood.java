@@ -16,13 +16,13 @@ public class Neighborhood {
         this.origin[1] = 1;
         this.size[0] = 3;
         this.size[1] = 3;
-        this.neighbors = new boolean[3][3];
+        this.neighbors = new boolean[2][2];
         this.clearNeighbors();
         
         this.neighbors[1][0] = true;
+        this.neighbors[1][2] = true;
         this.neighbors[0][1] = true;
-        this.neighbors[3][0] = true;
-        this.neighbors[0][3] = true;
+        this.neighbors[2][1] = true;
         
         this.count = 4;
     }
