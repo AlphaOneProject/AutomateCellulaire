@@ -29,6 +29,10 @@ public class Automaton {
     public State getState() {
         return this.state;
     }
+    
+    public void setState(State new_state) {
+        this.state = new_state;
+    }
 
     public int getAge() {
         return this.age;
