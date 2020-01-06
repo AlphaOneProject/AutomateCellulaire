@@ -39,6 +39,14 @@ public class Grid {
         return states;
     }
     
+    public void setStates(State[][] new_states) {
+        for(int i = 0; i < this.height; i++) {
+            for(int j = 0; j < this.width; j++) {
+                this.automata[i][j].setState(new_states[i][j]);
+            }
+        }
+    }
+    
     public int getWidth() {
         return this.width;
     }
