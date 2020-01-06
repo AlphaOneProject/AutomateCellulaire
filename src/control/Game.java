@@ -1,8 +1,9 @@
 package control;
 
-import model.Extension;
+import java.util.Random;
 
-import view.*;
+import model.Extension;
+import view.SetupGUI;
 
 public class Game {
     
@@ -15,6 +16,7 @@ public class Game {
     private Extension extension;
     private int start_cells_number;
     private int startingPlayers;
+    private Random random;
     
     // Methods.
 
@@ -24,6 +26,7 @@ public class Game {
         this.height = 10;
         this.extension = ExtensionFactory.getInstance().getExtension("pacman", null);
         this.start_cells_number = 1;
+        this.random = new Random(java.lang.System.currentTimeMillis());
     }
     
     public static Game getInstance() {
@@ -76,9 +79,8 @@ public class Game {
     }
     
     public void start() {
-        // WIP
         // Will start the initial view & let the user customize their parameters.
-        SetupGUI setup = new SetupGUI();        
+        SetupGUI setup = new SetupGUI();
     }
     
     public void setStartingPlayers(int players) {
@@ -87,5 +89,14 @@ public class Game {
 
     public int getStartingPlayers() {
         return startingPlayers;
+    }
+    
+    public Random getRandom() {
+        return this.random;
+    }
+    
+    public void next_turn() {
+        PlayerManager.getInstance().next_turn();
+        this.turn_number++;
     }
 }

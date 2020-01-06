@@ -1,10 +1,7 @@
 package control;
 
 import java.util.ArrayList;
-
-import model.Neighborhood;
 import model.Player;
-import model.Rule;
 import model.State;
 
 public class PlayerManager {
@@ -13,7 +10,7 @@ public class PlayerManager {
     
     private static PlayerManager instance;
     private ArrayList<Player> players;
-
+    
     // Methods.
     
     private PlayerManager() {
@@ -73,7 +70,28 @@ public class PlayerManager {
         this.get(id).setRule(RuleFactory.getInstance().getRule(rule_name));
     }
     
-    public void updateGrid() {
+    public void next_turn() {
+        for (Player player : this.players) {
+            player.nextTurn();
+        }
+        ArrayList<Player> competitors = new ArrayList<Player>();
+        Player winner;
+        for (int i = 0; i < Game.getInstance().getHeight(); i++) {
+            for (int j = 0; j < Game.getInstance().getWidth(); j++) {
+                competitors = new ArrayList<Player>();
+                for (Player player : this.players) {
+                    if (player.getGrid().getStates()[i][j] != State.DEAD) competitors.add(player);
+                }
+                winner = competitors.get(Game.getInstance().getRandom().nextInt(competitors.size()));
+                competitors.remove(winner);
+                for (Player loser : competitors) {
+                    loser.getGrid().getAutomata()[i][j].setState(State.DEAD);
+                }
+            }
+        }
+    }
+    
+    protected void updateGrid() {
         for (Player player : this.players) {
             player.setGridSize(Game.getInstance().getWidth(), Game.getInstance().getHeight());
         }
