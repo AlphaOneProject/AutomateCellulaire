@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.event.*;
@@ -30,12 +31,12 @@ public class PlacingGUI extends JFrame {
     // Attributes
 
     private static final long serialVersionUID = 4078728479243413794L;
-    
     private JLabel JLabelCellsLeft;
     private int width;
     private int height;
     private static PlayerManager playerManager = PlayerManager.getInstance();
-    private static ArrayList<JLayeredPane> gridList = new ArrayList<JLayeredPane>();
+    private ArrayList<GridGUI> gridList = new ArrayList<GridGUI>();
+    private JLayeredPane gridsLayeredPane;
 
     // Methods
 
@@ -53,20 +54,23 @@ public class PlacingGUI extends JFrame {
 
         getContentPane().setLayout(new BorderLayout());
         JPanel topPanel = new JPanel(new BorderLayout());
+
+        gridsLayeredPane = new JLayeredPane();
+        gridsLayeredPane.setPreferredSize(new Dimension(500, 500));
+
+        getContentPane().add(gridsLayeredPane);
         getContentPane().add(topPanel, BorderLayout.NORTH);
 
         for (int gridIndex = 0; gridIndex < playerManager.getPlayerCount(); gridIndex++) {
 
             GridGUI grid = new GridGUI(this.width, this.height);
-            if (gridIndex == 0) {
-
-            }
+            grid.setCellColor(gridIndex, 0, grid.getPlayerColor());
+            grid.setBounds(0, 0, 500, 500);
             gridList.add(grid);
             
-            getContentPane().add(grid, BorderLayout.CENTER);
+            gridsLayeredPane.add(grid, JLayeredPane.DEFAULT_LAYER);
+            gridsLayeredPane.setLayer(grid, new Integer(playerManager.getPlayerCount() - gridIndex));
         }
-
-        
 
         // Fenêtre
         setSize(width * 50, height * 50);
@@ -75,11 +79,5 @@ public class PlacingGUI extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
         update(getGraphics());
-    }
-
-    public void btnValidateClickHandler(ActionEvent e) {
-        JButton btn = (JButton)e.getSource();
-
-        // TODO : Donner le tableau getInitCells() au controleur
     }
 }
