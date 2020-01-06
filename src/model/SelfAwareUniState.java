@@ -2,7 +2,7 @@ package model;
 
 import control.Game;
 
-public class UniState implements Rule {
+public class SelfAwareUniState implements Rule {
     
     // Attributes.
     
@@ -10,27 +10,19 @@ public class UniState implements Rule {
     private int id;
     private String name;
     private State match_state;
-    private State[] results;
+    private State[] self;
+    private State[][] results;
     private Neighborhood neighborhood;
 
     // Methods.
     
-    public UniState() {
-        this.id = next_id;
-        next_id++;
-        
-        this.name = "Nom du pif";
-        this.match_state = State.ALIVE;
-        this.results = new State[] {State.DEAD, State.ALIVE, State.ALIVE, State.DEAD, State.DEAD};
-        this.neighborhood = new Neighborhood();
-    }
-    
-    public UniState(String name, State match_state, State[] results, Neighborhood neighborhood) {
+    public SelfAwareUniState(String name, State match_state, State[] self, State[][] results, Neighborhood neighborhood) {
         this.id = next_id;
         next_id++;
         
         this.name = name;
         this.match_state = match_state;
+        this.self = self;
         this.results = results;
         this.neighborhood = neighborhood;
     }
@@ -53,11 +45,15 @@ public class UniState implements Rule {
 
     @Override
     public State applyRule(Grid grid, Automaton automaton) {
+        int matching_self_state = 0;
+        for (int i = 0; i < this.self.length; i++) {
+            if (this.self[i] == automaton.getState()) break;
+        }
         int matching_cells = 0;
         for(int[] delta : neighborhood.getNeighbors()) {
             if(Game.getInstance().getExtension().get(grid, automaton.getX() + delta[0],
                automaton.getY() + delta[1]).getState() == this.match_state) { matching_cells++; }
         }
-        return this.results[matching_cells];
+        return this.results[matching_self_state][matching_cells];
     }
 }

@@ -65,8 +65,12 @@ public class PlayerManager {
         return this.players.size();
     }
     
-    public void setPlayerRule(int id, Rule new_rule) {
-        this.get(id).setRule(new_rule);
+    public String getPlayerRule(int id) {
+        return this.get(id).getRule().getName();
+    }
+    
+    public void setPlayerRule(int id, String rule_name) {
+        this.get(id).setRule(RuleFactory.getInstance().getRule(rule_name));
     }
     
     public void updateGrid() {
