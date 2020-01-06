@@ -58,6 +58,10 @@ public class PlacingGUI extends JFrame {
         for (int gridIndex = 0; gridIndex < playerManager.getPlayerCount(); gridIndex++) {
 
             GridGUI grid = new GridGUI(this.width, this.height);
+            if (gridIndex == 0) {
+
+            }
+            gridList.add(grid);
             
             getContentPane().add(grid, BorderLayout.CENTER);
         }
