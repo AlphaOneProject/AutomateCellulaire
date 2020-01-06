@@ -8,15 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 
 import java.awt.FlowLayout;
 
-/**
- * TODO : mettre en oeuvre les relations avec le modèle et les contrôleurs
- */
 public class SetupGUI extends JFrame {
 
     /**
@@ -40,33 +36,33 @@ public class SetupGUI extends JFrame {
         // Panel for grid width selection
         JPanel jpWidth = new JPanel(new FlowLayout());
         jpWidth.add(new JLabel("Largeur de la grille :"));
-        JSpinner spinnerWidth = new JSpinner(new SpinnerNumberModel(1, 0, 1000, 1));
+        JSpinner spinnerWidth = new JSpinner(new SpinnerNumberModel(20, 1, 1000, 1));
         jpWidth.add(spinnerWidth);
         jpGridSize.add(jpWidth);
 
         // Panel for grid height selection
         JPanel jpHeight = new JPanel(new FlowLayout());
         jpHeight.add(new JLabel("Hauteur de la grille :"));
-        JSpinner spinnerHeight = new JSpinner(new SpinnerNumberModel(1, 0, 1000, 1));
+        JSpinner spinnerHeight = new JSpinner(new SpinnerNumberModel(20, 1, 1000, 1));
         jpHeight.add(spinnerHeight);
         jpGridSize.add(jpHeight);
 
         // Panel for number of players selection
         JPanel jpNbPlayers = new JPanel(new FlowLayout());
         jpNbPlayers.add(new JLabel("Nombre de joueurs :"));
-        JSpinner spinnerNbPlayers = new JSpinner(new SpinnerNumberModel(1, 0, MAX_PLAYERS, 1));
+        JSpinner spinnerNbPlayers = new JSpinner(new SpinnerNumberModel(2, 1, MAX_PLAYERS, 1));
         jpNbPlayers.add(spinnerNbPlayers);
 
         // Panel of number of starting cells selection
         JPanel jpNbStartCells = new JPanel(new FlowLayout());
         jpNbStartCells.add(new JLabel("Nombre de cellules de départ"));
-        JSpinner spinnerNbStartCells = new JSpinner(new SpinnerNumberModel(1, 0, MAX_CELLS, 1));
+        JSpinner spinnerNbStartCells = new JSpinner(new SpinnerNumberModel(3, 1, MAX_CELLS, 1));
         jpNbStartCells.add(spinnerNbStartCells);
 
         // Panel for number of turns selection
         JPanel jpNbTurns = new JPanel(new FlowLayout());
         jpNbTurns.add(new JLabel("Nombre de tours :"));
-        JSpinner spinnerNbTurns = new JSpinner(new SpinnerNumberModel(1, 0, 10000, 1));
+        JSpinner spinnerNbTurns = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
         jpNbTurns.add(spinnerNbTurns);
 
         // Button to validate the form
