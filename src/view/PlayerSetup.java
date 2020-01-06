@@ -79,6 +79,8 @@ public class PlayerSetup extends JFrame {
                     }
                 }
             }
+            setVisible(false);
+            PlacingGUI p = new PlacingGUI(gameInstance.getWidth(), gameInstance.getHeight(), gameInstance.getStartCellsNumber());
         });
         jpPlayersSelection.add(btnValidate);
         content.add(jpPlayersSelection);

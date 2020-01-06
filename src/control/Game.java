@@ -78,8 +78,7 @@ public class Game {
     public void start() {
         // WIP
         // Will start the initial view & let the user customize their parameters.
-        SetupGUI setup = new SetupGUI();
-        // PlacingGUI g = new PlacingGUI(10, 10, 5);
+        SetupGUI setup = new SetupGUI();        
     }
     
     public void setStartingPlayers(int players) {
