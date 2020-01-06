@@ -62,6 +62,18 @@ public class PlayerManager {
         return this.players.size();
     }
     
+    public int[] getPlayerIds() {
+        int[] ids = new int[this.players.size()];
+        for (int i = 0; i < this.players.size(); i++) {
+            ids[i] = this.players.get(i).getId();
+        }
+        return ids;
+    }
+    
+    public String getPlayerName(int id) {
+        return this.get(id).getName();
+    }
+    
     public String getPlayerRule(int id) {
         return this.get(id).getRule().getName();
     }
