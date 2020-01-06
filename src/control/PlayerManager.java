@@ -58,6 +58,10 @@ public class PlayerManager {
         return this.get(id).getGrid().getStates();
     }
     
+    public void setPlayerGrid(int id, State[][] new_states) {
+        this.get(id).getGrid().setStates(new_states);
+    }
+    
     public int getPlayerCount() {
         return this.players.size();
     }
