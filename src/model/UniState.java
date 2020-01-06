@@ -5,23 +5,30 @@ import control.Game;
 public class UniState implements Rule {
     
     // Attributes.
-    
+
+    private String name;
     private State match_state;
     private State[] results;
     private Neighborhood neighborhood;
-    
+
     // Methods.
     
     public UniState() {
+        this.name = "Nom du pif";
         this.match_state = State.ALIVE;
         this.results = new State[] {State.DEAD, State.ALIVE, State.ALIVE, State.DEAD, State.DEAD};
         this.neighborhood = new Neighborhood();
     }
     
-    public UniState(State match_state, State[] results, Neighborhood neighborhood) {
+    public UniState(String name, State match_state, State[] results, Neighborhood neighborhood) {
+        this.name = name;
         this.match_state = match_state;
         this.results = results;
         this.neighborhood = neighborhood;
+    }
+    
+    public String getName() {
+        return this.name;
     }
     
     public Neighborhood getNeighborhood() {

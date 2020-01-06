@@ -29,6 +29,16 @@ public class Grid {
         return this.automata.clone();
     }
     
+    public State[][] getStates() {
+        State[][] states = new State[this.height][this.width];
+        for(int i = 0; i < this.height; i++) {
+            for(int j = 0; j < this.width; j++) {
+                states[i][j] = this.automata[i][j].getState();
+            }
+        }
+        return states;
+    }
+    
     public int getWidth() {
         return this.width;
     }

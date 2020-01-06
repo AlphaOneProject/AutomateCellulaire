@@ -20,14 +20,14 @@ public class RuleFactory {
         return instance;
     }
     
-    public Rule getRule(String rule_type, State match_state, State[] results, int n_width, int n_height,
+    public Rule getRule(String rule_type, String name, State match_state, State[] results,
                         boolean[][] n_selected, int[] n_origin) {
         Rule new_rule = null;
         
         switch(rule_type) {
         case "unistate":
             Neighborhood neighborhood = new Neighborhood(n_selected, n_origin);
-            new_rule = new UniState(match_state, results, neighborhood);
+            new_rule = new UniState(name, match_state, results, neighborhood);
             break;
         default:
             throw new IllegalArgumentException("Get Rule: Invalid rule type provided: \"" + rule_type +

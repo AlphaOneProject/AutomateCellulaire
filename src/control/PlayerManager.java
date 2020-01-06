@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Neighborhood;
 import model.Player;
 import model.Rule;
+import model.State;
 
 public class PlayerManager {
     
@@ -40,7 +41,7 @@ public class PlayerManager {
             else cursor++;
         }
         if (found) players.remove(cursor);
-        else throw new IllegalArgumentException("Remove Player: Player n�" + id + " does not exists.");
+        else throw new IllegalArgumentException("Remove Player: Player number " + id + " does not exists.");
     }
     
     private Player get(int id) {
@@ -53,7 +54,11 @@ public class PlayerManager {
             else cursor++;
         }
         if (found) return players.get(cursor);
-        else throw new IllegalArgumentException("Get Player: Player n�" + id + " does not exists.");
+        else throw new IllegalArgumentException("Get Player: Player number " + id + " does not exists.");
+    }
+    
+    public State[][] getPlayerGrid(int id) {
+        return this.get(id).getGrid().getStates();
     }
     
     public int getPlayerCount() {
