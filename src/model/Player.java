@@ -18,7 +18,6 @@ public class Player {
         this.id = next_id;
         this.name = name;
         this.grid = new Grid(width, height);
-        this.rule = new UniState();
         
         next_id++;
     }
