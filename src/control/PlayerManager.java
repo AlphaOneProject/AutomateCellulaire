@@ -103,6 +103,7 @@ public class PlayerManager {
                 for (Player player : this.players) {
                     if (player.getGrid().getStates()[i][j] != State.DEAD) competitors.add(player);
                 }
+                if (competitors.isEmpty()) continue;
                 winner = competitors.get(Game.getInstance().getRandom().nextInt(competitors.size()));
                 competitors.remove(winner);
                 for (Player loser : competitors) {
