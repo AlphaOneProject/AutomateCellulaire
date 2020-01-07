@@ -83,7 +83,7 @@ public class PlayerManager {
     }
     
     public void setPlayerRule(int id, String rule_name) {
-        this.get(id).setRule(RuleFactory.getInstance().getRule(rule_name));
+        this.get(id).setRule(RuleManager.getInstance().get(rule_name));
     }
     
     public void next_turn() {
