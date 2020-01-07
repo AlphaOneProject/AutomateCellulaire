@@ -93,7 +93,7 @@ public class GridGUI extends JPanel {
                         this.player_cursor -= this.players.length;
                         this.cells_left--;
                     }
-                else if (this.cells_left == 0) {
+                if (this.cells_left == 0) {
                     initCells();
                     startGame();
                 }
