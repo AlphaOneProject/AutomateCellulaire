@@ -6,7 +6,6 @@ public class UniState implements Rule {
     
     // Attributes.
     
-    private static int next_id = 0;
     private int id;
     private String name;
     private State match_state;
@@ -15,20 +14,8 @@ public class UniState implements Rule {
 
     // Methods.
     
-    public UniState() {
-        this.id = next_id;
-        next_id++;
-        
-        this.name = "Nom du pif";
-        this.match_state = State.ALIVE;
-        this.results = new State[] {State.DEAD, State.ALIVE, State.ALIVE, State.DEAD, State.DEAD};
-        this.neighborhood = new Neighborhood();
-    }
-    
-    public UniState(String name, State match_state, State[] results, Neighborhood neighborhood) {
-        this.id = next_id;
-        next_id++;
-        
+    public UniState(int id, String name, State match_state, State[] results, Neighborhood neighborhood) {
+        this.id = id;
         this.name = name;
         this.match_state = match_state;
         this.results = results;

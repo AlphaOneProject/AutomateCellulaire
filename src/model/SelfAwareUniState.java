@@ -6,7 +6,6 @@ public class SelfAwareUniState implements Rule {
     
     // Attributes.
     
-    private static int next_id = 0;
     private int id;
     private String name;
     private State match_state;
@@ -16,10 +15,8 @@ public class SelfAwareUniState implements Rule {
 
     // Methods.
     
-    public SelfAwareUniState(String name, State match_state, State[] self, State[][] results, Neighborhood neighborhood) {
-        this.id = next_id;
-        next_id++;
-        
+    public SelfAwareUniState(int id, String name, State match_state, State[] self, State[][] results, Neighborhood neighborhood) {
+        this.id = id;
         this.name = name;
         this.match_state = match_state;
         this.self = self;
