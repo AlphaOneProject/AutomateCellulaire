@@ -7,19 +7,14 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.Random;
-
-import control.Game;
-import control.PlayerManager;
-
 import java.awt.BorderLayout;
-
 import java.util.Dictionary;
-
 import java.util.Hashtable;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import control.Game;
+import control.PlayerManager;
 import model.State;
 
 /**
