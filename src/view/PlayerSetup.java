@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Component;
 
 import java.util.ArrayList;
@@ -24,24 +24,54 @@ public class PlayerSetup extends JFrame {
     private static final long serialVersionUID = -7311347608273233951L;
     private static PlayerManager playerManager = PlayerManager.getInstance();
     private Game gameInstance = Game.getInstance();
+    
     private ArrayList<Integer> alreadyPickedPlayers = new ArrayList<Integer>();
-    private JPanel jpPlayersSelection;
+    private JPanel jpPlayerSelection;
+    private JTextField jtfPlayer;
+    private JButton btnPlayerValid;
+    private JComboBox<String> jcbRule;
 
     public PlayerSetup() {
         super("Initialisation");
 
-        JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
+        JPanel content = new JPanel(new FlowLayout());
 
-        this.jpPlayersSelection = new JPanel();
-        jpPlayersSelection.setLayout(new BoxLayout(jpPlayersSelection, BoxLayout.Y_AXIS));
-                
-        setNextPlayerForm();
+        this.jpPlayerSelection = new JPanel();
+        jpPlayerSelection.setLayout(new BoxLayout(jpPlayerSelection, BoxLayout.Y_AXIS));
 
+        int player = getRandomPlayer();
+        this.jpPlayerSelection.add(new JLabel("Nom du joueur :"));
+        jtfPlayer = new JTextField();
+        jtfPlayer.setColumns(10);
+        jpPlayerSelection.add(jtfPlayer);
+        jpPlayerSelection.add(new JLabel("Choisissez votre automate"));
+        jcbRule = new JComboBox<String>(RuleManager.getInstance().getRules());
+        jpPlayerSelection.add(jcbRule);
+        content.add(jpPlayerSelection);
+        this.btnPlayerValid = new JButton("Valider joueur "+player);
+        btnPlayerValid.addActionListener( e -> {
+            if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){
+                setVisible(false);
+                GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
+            }  
+            else {
+                int playerIdFromButton = Integer.parseInt(btnPlayerValid.getText().substring(btnPlayerValid.getText().length() - 1));
+                playerManager.setPlayerRule(playerIdFromButton, jcbRule.getSelectedItem().toString());
 
+                jcbRule.remove(jcbRule.getSelectedIndex());
+                btnPlayerValid.setText("Valider joueur "+getRandomPlayer());
+                System.out.println(jtfPlayer.getText());
+                System.out.println(jcbRule.getSelectedItem().toString());
+                jcbRule.remove(jcbRule.getSelectedIndex());
+                btnPlayerValid.setText("Valider joueur "+getRandomPlayer());
+                this.doLayout();
+                update(getGraphics());
+            }
+        });
+        jpPlayerSelection.add(btnPlayerValid);
 
-        content.add(jpPlayersSelection);
-        getContentPane().add(content, BorderLayout.CENTER);
+        content.add(jpPlayerSelection);
+        getContentPane().add(content);
 
         setSize(500, 500);
         setLocationRelativeTo(null);
@@ -50,48 +80,21 @@ public class PlayerSetup extends JFrame {
         setVisible(true);
     }
 
-    public void setNextPlayerForm() {
-        // Random choice of player
-        Random randomNumber = Game.getInstance().getRandom();
+    public int getRandomPlayer() {
+        int res = -1;
         boolean valid = false;
+        Random randomNumber = Game.getInstance().getRandom();
+        int player = randomNumber.nextInt(playerManager.getPlayerCount());
         while (!valid)
         {
-            int player = randomNumber.nextInt(playerManager.getPlayerCount());
-            if (!alreadyPickedPlayers.contains(player)) 
+            System.out.println("pas valide");
+            if (!this.alreadyPickedPlayers.contains(player)) 
             {
-                getContentPane().removeAll();
-                System.out.println("valid");
-                alreadyPickedPlayers.add(player);
+                this.alreadyPickedPlayers.add(player);
                 valid = true;
-
-                JPanel jpPlayerSelection = new JPanel();
-
-                jpPlayerSelection.add(new JLabel("Nom du joueur :"));
-                JTextField jtfPlayer = new JTextField();
-                jtfPlayer.setColumns(10);
-                jpPlayerSelection.add(jtfPlayer);
-                jpPlayerSelection.add(new JLabel("Choisissez votre automate"));
-                JComboBox<String> jcbRule = new JComboBox<String>(RuleManager.getInstance().getRules());
-                jpPlayerSelection.add(jcbRule);
-                jpPlayersSelection.add(jpPlayerSelection);
-                JButton btnPlayerValid = new JButton("Valider joueur "+player);
-                btnPlayerValid.addActionListener( e -> {
-                    playerManager.setPlayerRule(player, jcbRule.getSelectedItem().toString());
-                    System.out.println(jtfPlayer.getText());
-                    System.out.println(jcbRule.getSelectedItem().toString());
-                    if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){
-                        setVisible(false);
-                        GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
-                    }
-                    else {
-                        setNextPlayerForm();
-                    }
-                });
-                jpPlayerSelection.add(btnPlayerValid);
-                getContentPane().add(jpPlayersSelection);
-                this.doLayout();
-                update(getGraphics());
+                res = player;
             }
         }
+        return res;
     }
 }
