@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -88,6 +89,7 @@ public class GridGUI extends JPanel {
         if (btn.getBackground().equals(Color.WHITE)) {
                 if (this.cells_left > 0) {
                     btn.setBackground(this.player_colors.get(this.players[this.player_cursor]));
+                    jlTitle.setText(player_manager.getPlayerName(this.players[this.player_cursor]));
                     this.player_cursor++;
                     if (this.player_cursor >= this.players.length) {
                         this.player_cursor -= this.players.length;
@@ -161,11 +163,16 @@ public class GridGUI extends JPanel {
         }
         // If only one player has living automaton
         else {
+            boolean[] players_alive = new boolean[this.player_manager.getPlayerCount()];
             int number_of_players_alive = 0;
             int winner;
             for (int player : this.players) {
                 if (isPlayerAlive(player)) {
+                    players_alive[player] = true;
                     number_of_players_alive ++;
+                }
+                else {
+                    players_alive[player] = false;
                 }
             }
             if (number_of_players_alive == 0) {
@@ -174,7 +181,11 @@ public class GridGUI extends JPanel {
             }
             else if (number_of_players_alive == 1) {
                 res = true;
-                JOptionPane.showMessageDialog(null, "Joueur est gagnant");
+                for (int i = 0; i < players_alive.length; i++) {
+                    if (players_alive[i]){
+                        JOptionPane.showMessageDialog(null, player_manager.getPlayerName(i)+" est gagnant");
+                    }
+                }
             }
             else {
                 // Game not over
@@ -195,12 +206,7 @@ public class GridGUI extends JPanel {
         return res;
     }
 
-    public void updateGrid() {
-        for (int i = 0; i < this.grid_height; i++) {
-            for (int j = 0; j < this.grid_width; j++) {
-                this.units[i][j].setBackground(Color.WHITE);
-            }
-        }
+    public void updateGrid() {        
         for (int player : this.players) {
             System.out.println("GridGUI:207:player"+player+" is "+player_manager.getPlayerName(player));
             State[][] grid = player_manager.getPlayerGrid(player);
@@ -209,18 +215,14 @@ public class GridGUI extends JPanel {
                     if (grid[i][j] != State.DEAD) {
                         this.units[i][j].setBackground(this.player_colors.get(player));
                     }
+                    else {
+                        this.units[i][j].setBackground(Color.WHITE);
+                    }
                 }
             }
         }
-
-        int number_of_players_alive = 0;
-        for (int player : this.players) {
-            if (isPlayerAlive(player)) {
-                number_of_players_alive ++;
-            }
-        }
-        if (number_of_players_alive > 0) {
-            game.next_turn();
-        }
+        game.next_turn();
+        doLayout();
+        update(getGraphics());
     }
 }
