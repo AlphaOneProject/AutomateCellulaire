@@ -212,6 +212,15 @@ public class GridGUI extends JPanel {
                 }
             }
         }
-        game.next_turn();
+
+        int number_of_players_alive = 0;
+        for (int player : this.players) {
+            if (isPlayerAlive(player)) {
+                number_of_players_alive ++;
+            }
+        }
+        if (number_of_players_alive > 0) {
+            game.next_turn();
+        }
     }
 }
