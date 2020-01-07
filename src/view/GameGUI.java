@@ -55,6 +55,4 @@ public class GameGUI extends JFrame {
         setVisible(true);
         update(getGraphics());
     }
-
-
 }

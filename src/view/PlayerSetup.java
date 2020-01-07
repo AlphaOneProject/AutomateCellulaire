@@ -17,6 +17,8 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -52,9 +54,14 @@ public class PlayerSetup extends JFrame {
         jtfPlayer.setColumns(10);
         jpPlayerSelection.add(jtfPlayer);
         jpPlayerSelection.add(new JLabel("Choisissez votre automate"));
-        jcbRule = new JComboBox<String>(RuleManager.getInstance().getRules());
+
+        String[] rulesList = RuleManager.getInstance().getRules();
+        ArrayList<String> rulesArrayList = new ArrayList<String>();
+        Collections.addAll(rulesArrayList, rulesList);
+        jcbRule = new JComboBox<String>(rulesArrayList.toArray(rulesList));
         jpPlayerSelection.add(jcbRule);
-        content.add(jpPlayerSelection);
+        
+        // content.add(jpPlayerSelection);
         this.btnPlayerValid = new JButton("Valider joueur "+player);
         btnPlayerValid.addActionListener( e -> {
             if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){
@@ -68,11 +75,15 @@ public class PlayerSetup extends JFrame {
 
                 // updating gui
                 int newPlayer = getRandomPlayer();
-                jcbRule.remove(jcbRule.getSelectedIndex());
                 btnPlayerValid.setText("Valider joueur "+newPlayer);
-                System.out.println(jtfPlayer.getText());
-                System.out.println(jcbRule.getSelectedItem().toString());
-                jcbRule.remove(jcbRule.getSelectedIndex());
+                jtfPlayer.setText("");
+
+                if (jcbRule.getSelectedIndex() > -1) {
+                    rulesArrayList.remove(jcbRule.getSelectedIndex());
+                    jcbRule.removeItemAt(jcbRule.getSelectedIndex());
+                    jcbRule.invalidate();
+                }
+
                 btnPlayerValid.setText("Valider joueur "+newPlayer);
                 this.doLayout();
                 update(getGraphics());
@@ -95,7 +106,6 @@ public class PlayerSetup extends JFrame {
      * @return random player id
      */
     public int getRandomPlayer() {
-        System.out.println("getrandomplayer");
         int res = -1;
         boolean valid = false;
         Random randomNumber = Game.getInstance().getRandom();
@@ -107,15 +117,12 @@ public class PlayerSetup extends JFrame {
             while (!valid)
             {
                 int player = randomNumber.nextInt(playerManager.getPlayerCount());
-                System.out.println(player+" "+this.alreadyPickedPlayers.size());
                 if (!this.alreadyPickedPlayers.contains(player)) 
                 {
                     this.alreadyPickedPlayers.add(player);
                     valid = true;
                     res = player;
                 }
-                System.out.println(this.alreadyPickedPlayers.size());
-                System.out.println("");
             }
         }
         return res;
