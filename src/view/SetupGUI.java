@@ -75,6 +75,9 @@ public class SetupGUI extends JFrame {
             gameInstance.setStartingPlayers( (int)spinnerNbPlayers.getValue() );
             gameInstance.setStartCellsNumber( (int)spinnerNbStartCells.getValue() );
             // Launching player setup form
+            for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
+                PlayerManager.getInstance().add("Joueur "+(i+1));
+            }
             PlayerSetup playerSetup = new PlayerSetup();
             setVisible(false);
         });

@@ -38,6 +38,8 @@ public class PlayerSetup extends JFrame {
                 
         setNextPlayerForm();
 
+
+
         content.add(jpPlayersSelection);
         getContentPane().add(content, BorderLayout.CENTER);
 
@@ -50,17 +52,18 @@ public class PlayerSetup extends JFrame {
 
     public void setNextPlayerForm() {
         // Random choice of player
-        Random randomNumber = new Random();
+        Random randomNumber = Game.getInstance().getRandom();
         boolean valid = false;
         while (!valid)
         {
-            int player = randomNumber.nextInt(gameInstance.getStartingPlayers());
+            int player = randomNumber.nextInt(playerManager.getPlayerCount());
             if (!alreadyPickedPlayers.contains(player)) 
             {
+                getContentPane().removeAll();
                 System.out.println("valid");
                 alreadyPickedPlayers.add(player);
                 valid = true;
-                jpPlayersSelection.removeAll();
+
                 JPanel jpPlayerSelection = new JPanel();
 
                 jpPlayerSelection.add(new JLabel("Nom du joueur :"));
@@ -71,17 +74,12 @@ public class PlayerSetup extends JFrame {
                 JComboBox<String> jcbRule = new JComboBox<String>(RuleManager.getInstance().getRules());
                 jpPlayerSelection.add(jcbRule);
                 jpPlayersSelection.add(jpPlayerSelection);
-                JButton btnPlayerValid = new JButton("Valider joueur n°"+player);
+                JButton btnPlayerValid = new JButton("Valider joueur "+player);
                 btnPlayerValid.addActionListener( e -> {
-                    playerManager.add( jtfPlayer.getText() );
-                    try {
-                        playerManager.setPlayerRule(player, jcbRule.getSelectedItem().toString());
-                    }
-                    catch (Exception ex){}
+                    playerManager.setPlayerRule(player, jcbRule.getSelectedItem().toString());
                     System.out.println(jtfPlayer.getText());
                     System.out.println(jcbRule.getSelectedItem().toString());
-                    jpPlayerSelection.removeAll();
-                    if (alreadyPickedPlayers.size() == gameInstance.getStartingPlayers()) {
+                    if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){
                         setVisible(false);
                         GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
                     }
@@ -90,6 +88,8 @@ public class PlayerSetup extends JFrame {
                     }
                 });
                 jpPlayerSelection.add(btnPlayerValid);
+                getContentPane().add(jpPlayersSelection);
+                this.doLayout();
                 update(getGraphics());
             }
         }
