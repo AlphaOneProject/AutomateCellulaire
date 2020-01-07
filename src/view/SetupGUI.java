@@ -1,6 +1,7 @@
 package view;
 
 import control.*;
+import model.State;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -74,7 +75,7 @@ public class SetupGUI extends JFrame {
         // Panel for extension selection
         JPanel jpExtension = new JPanel(new FlowLayout());
         jpExtension.add(new JLabel("Extension :"));
-        String[] extensionsList = {"Répétition", "Pacman", "Symétrie", "Constante"};
+        String[] extensionsList = {"repetition", "pacman", "symmetry", "constant"};
         JComboBox<String> jcbExtension = new JComboBox<String>(extensionsList);
         jpExtension.add(jcbExtension);
 
@@ -87,7 +88,11 @@ public class SetupGUI extends JFrame {
             gameInstance.setMaxTurns( (int)spinnerNbTurns.getValue() );
             gameInstance.setStartingPlayers( (int)spinnerNbPlayers.getValue() );
             gameInstance.setStartCellsNumber( (int)spinnerNbStartCells.getValue() );
-            ExtensionFactory.getInstance().getExtension(jcbExtension.getSelectedItem(), argument);
+            String chosenExtension = (String)jcbExtension.getSelectedItem();
+            Object argument = null;
+            if (chosenExtension.equals("symmetry")) argument = 0;
+            else if (chosenExtension.equals("constant")) argument = State.DEAD;
+            ExtensionFactory.getInstance().getExtension(chosenExtension, argument);
             // Launching player setup form
             for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
                 PlayerManager.getInstance().add("Joueur "+(i+1));
