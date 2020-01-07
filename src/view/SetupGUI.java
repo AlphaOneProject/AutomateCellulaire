@@ -78,8 +78,9 @@ public class SetupGUI extends JFrame {
             for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
                 PlayerManager.getInstance().add("Joueur "+(i+1));
             }
-            PlayerSetup playerSetup = new PlayerSetup();
-            setVisible(false);
+            GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
+            // PlayerSetup playerSetup = new PlayerSetup();
+            // setVisible(false);
         });
 
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));

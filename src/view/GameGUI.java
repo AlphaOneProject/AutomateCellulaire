@@ -28,7 +28,7 @@ public class GameGUI extends JFrame {
     // Methods
 
     /**
-     * Instanciates a grid GUI to select initial player cells
+     * 
      * @param width width of the grid
      * @param height height of the grid
      */
@@ -46,13 +46,10 @@ public class GameGUI extends JFrame {
         getContentPane().add(gridPanel, BorderLayout.CENTER);
         getContentPane().add(topPanel, BorderLayout.NORTH);
 
-        for (int gridIndex = 0; gridIndex < playerManager.getPlayerCount(); gridIndex++) {
-
-            GridGUI grid = new GridGUI(this.width, this.height, gridIndex);
-            grid.setCellColor(gridIndex, 0, grid.getPlayerColor());
-            grid.setBounds(0, 0, 500, 500);
-            gridList.add(grid);
-        }
+        GridGUI grid = new GridGUI(this.width, this.height, 0);
+        grid.setCellColor(0, 0, grid.getPlayerColor());
+        grid.setBounds(0, 0, 500, 500);
+        getContentPane().add(grid);
 
         // Determines the first player to place cells
 
