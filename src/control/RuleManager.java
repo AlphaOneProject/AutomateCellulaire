@@ -18,6 +18,8 @@ public class RuleManager {
         this.rules.add(RuleFactory.getInstance().getRule("game_of_life"));
         this.rules.add(RuleFactory.getInstance().getRule("fredkin"));
         this.rules.add(RuleFactory.getInstance().getRuleECA(110));
+        this.rules.add(RuleFactory.getInstance().getRuleECA(66));
+        this.rules.add(RuleFactory.getInstance().getRuleECA(12));
     }
     
     public static RuleManager getInstance() {
