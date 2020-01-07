@@ -19,9 +19,7 @@ public class SetupGUI extends JFrame {
      *
      */
     private static final long serialVersionUID = 1285322896840177969L;
-
-    private int MAX_CELLS = 30;
-    private int MAX_PLAYERS = 5;
+    private final int MAX_CELLS = 30;
     private Game gameInstance = Game.getInstance();
 
     public SetupGUI() {
@@ -50,7 +48,9 @@ public class SetupGUI extends JFrame {
         // Panel for number of players selection
         JPanel jpNbPlayers = new JPanel(new FlowLayout());
         jpNbPlayers.add(new JLabel("Nombre de joueurs :"));
-        JSpinner spinnerNbPlayers = new JSpinner(new SpinnerNumberModel(2, 1, MAX_PLAYERS, 1));
+        int maxPlayers = RuleManager.getInstance().getRules().length;
+        JSpinner spinnerNbPlayers = new JSpinner(
+            new SpinnerNumberModel(2, 1, 5, 1));
         jpNbPlayers.add(spinnerNbPlayers);
 
         // Panel of number of starting cells selection
@@ -78,9 +78,8 @@ public class SetupGUI extends JFrame {
             for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
                 PlayerManager.getInstance().add("Joueur "+(i+1));
             }
-            // GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
             PlayerSetup playerSetup = new PlayerSetup();
-            // setVisible(false);
+            setVisible(false);
         });
 
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));

@@ -21,7 +21,6 @@ public class GameGUI extends JFrame {
     private JLabel JLabelCellsLeft;
     private int width;
     private int height;
-    private static PlayerManager playerManager = PlayerManager.getInstance();
     private ArrayList<GridGUI> gridList = new ArrayList<GridGUI>();
     private JPanel gridPanel;
 
@@ -49,8 +48,6 @@ public class GameGUI extends JFrame {
         GridGUI grid = new GridGUI(this.width, this.height);
         grid.setBounds(0, 0, 500, 500);
         getContentPane().add(grid);
-
-        // Determines the first player to place cells
 
         // Fenêtre
         setSize(width * 50, height * 50);

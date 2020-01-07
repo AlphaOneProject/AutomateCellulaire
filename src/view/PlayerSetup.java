@@ -55,15 +55,18 @@ public class PlayerSetup extends JFrame {
                 GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
             }  
             else {
+                // validating player
                 int playerIdFromButton = Integer.parseInt(btnPlayerValid.getText().substring(btnPlayerValid.getText().length() - 1));
                 playerManager.setPlayerRule(playerIdFromButton, jcbRule.getSelectedItem().toString());
 
+                // updating gui
+                int newPlayer = getRandomPlayer();
                 jcbRule.remove(jcbRule.getSelectedIndex());
-                btnPlayerValid.setText("Valider joueur "+getRandomPlayer());
+                btnPlayerValid.setText("Valider joueur "+newPlayer);
                 System.out.println(jtfPlayer.getText());
                 System.out.println(jcbRule.getSelectedItem().toString());
                 jcbRule.remove(jcbRule.getSelectedIndex());
-                btnPlayerValid.setText("Valider joueur "+getRandomPlayer());
+                btnPlayerValid.setText("Valider joueur "+newPlayer);
                 this.doLayout();
                 update(getGraphics());
             }
@@ -81,18 +84,27 @@ public class PlayerSetup extends JFrame {
     }
 
     public int getRandomPlayer() {
+        System.out.println("getrandomplayer");
         int res = -1;
         boolean valid = false;
         Random randomNumber = Game.getInstance().getRandom();
-        while (!valid)
-        {
-            System.out.println("pas valide");
-            int player = randomNumber.nextInt(playerManager.getPlayerCount());
-            if (!this.alreadyPickedPlayers.contains(player)) 
+        if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()) {
+            GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
+            setVisible(false);
+        }
+        else {
+            while (!valid)
             {
-                this.alreadyPickedPlayers.add(player);
-                valid = true;
-                res = player;
+                int player = randomNumber.nextInt(playerManager.getPlayerCount());
+                System.out.println(player+" "+this.alreadyPickedPlayers.size());
+                if (!this.alreadyPickedPlayers.contains(player)) 
+                {
+                    this.alreadyPickedPlayers.add(player);
+                    valid = true;
+                    res = player;
+                }
+                System.out.println(this.alreadyPickedPlayers.size());
+                System.out.println("");
             }
         }
         return res;

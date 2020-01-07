@@ -24,7 +24,6 @@ import model.State;
 /**
  * Grid used in the GUI
  */
-
 public class GridGUI extends JPanel {
 
     // Attributes
