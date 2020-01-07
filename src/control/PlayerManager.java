@@ -78,6 +78,10 @@ public class PlayerManager {
         return this.get(id).getName();
     }
     
+    public void setPlayerName(int id, String new_name) {
+        this.get(id).setName(new_name);
+    }
+    
     public String getPlayerRule(int id) {
         return this.get(id).getRule().getName();
     }
