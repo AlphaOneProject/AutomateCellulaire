@@ -42,14 +42,13 @@ public class Neighborhood {
     }
     
     public int[][] getNeighbors() {
-        int[][] deltas = new int[2][count];
+        int[][] deltas = new int[count][2];
         int local_count = 0;
         for(int i = 0; i < this.size[0]; i++) {
             for(int j = 0; j < this.size[1]; j++) {
                 if(this.neighbors[j][i]) {
-                    // WIP
-                    //deltas[local_count][0] = i - this.origin[0];
-                    //deltas[local_count][1] = j - this.origin[1];
+                    deltas[local_count][0] = i - this.origin[0];
+                    deltas[local_count][1] = j - this.origin[1];
                     local_count++;
                 }
             }
