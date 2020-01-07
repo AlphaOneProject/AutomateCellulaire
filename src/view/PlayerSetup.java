@@ -59,7 +59,7 @@ public class PlayerSetup extends JFrame {
             {
                 alreadyPickedPlayers.add(player);
                 valid = true;
-
+                jpPlayersSelection.removeAll();
                 JPanel jpPlayerSelection = new JPanel();
 
                 jpPlayerSelection.add(new JLabel("Nom du joueur :"));
