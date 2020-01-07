@@ -4,6 +4,7 @@ import control.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 
 import java.awt.FlowLayout;
+import java.security.cert.Extension;
 
 /**
  * GUI used to setup the game.
@@ -19,7 +21,6 @@ import java.awt.FlowLayout;
 public class SetupGUI extends JFrame {
 
     private static final long serialVersionUID = 1285322896840177969L;
-    private final int MAX_CELLS = 30;
     private Game gameInstance = Game.getInstance();
 
     /**
@@ -54,13 +55,14 @@ public class SetupGUI extends JFrame {
         jpNbPlayers.add(new JLabel("Nombre de joueurs :"));
         int maxPlayers = RuleManager.getInstance().getRules().length;
         JSpinner spinnerNbPlayers = new JSpinner(
-            new SpinnerNumberModel(2, 1, 5, 1));
+            new SpinnerNumberModel(2, 1, maxPlayers, 1));
         jpNbPlayers.add(spinnerNbPlayers);
 
         // Panel of number of starting cells selection
         JPanel jpNbStartCells = new JPanel(new FlowLayout());
         jpNbStartCells.add(new JLabel("Nombre de cellules de départ"));
-        JSpinner spinnerNbStartCells = new JSpinner(new SpinnerNumberModel(3, 1, MAX_CELLS, 1));
+        JSpinner spinnerNbStartCells = new JSpinner(
+            new SpinnerNumberModel(3, 1, (Integer)spinnerHeight.getValue()*(Integer)spinnerWidth.getValue(), 1));
         jpNbStartCells.add(spinnerNbStartCells);
 
         // Panel for number of turns selection
@@ -68,6 +70,13 @@ public class SetupGUI extends JFrame {
         jpNbTurns.add(new JLabel("Nombre de tours :"));
         JSpinner spinnerNbTurns = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
         jpNbTurns.add(spinnerNbTurns);
+
+        // Panel for extension selection
+        JPanel jpExtension = new JPanel(new FlowLayout());
+        jpExtension.add(new JLabel("Extension :"));
+        String[] extensionsList = {"Répétition", "Pacman", "Symétrie", "Constante"};
+        JComboBox<String> jcbExtension = new JComboBox<String>(extensionsList);
+        jpExtension.add(jcbExtension);
 
         // Button to validate the form
         JButton btnValidate = new JButton("Valider");
@@ -91,6 +100,7 @@ public class SetupGUI extends JFrame {
         content.add(jpNbPlayers);
         content.add(jpNbStartCells);
         content.add(jpNbTurns);
+        content.add(jpExtension);
         content.add(btnValidate);
         getContentPane().add(content);
 
