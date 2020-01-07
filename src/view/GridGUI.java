@@ -150,6 +150,7 @@ public class GridGUI extends JPanel {
         }
         // Starting the simulation.
         while (!isGameOver()) {
+            updateGrid();
             initCells();
         }
     }
@@ -194,5 +195,21 @@ public class GridGUI extends JPanel {
             }
         }
         return res;
+    }
+
+    public void updateGrid() {
+        for (int player : this.players) {
+            State[][] grid = player_manager.getPlayerGrid(player);
+            for (int i = 0; i < this.grid_height; i++) {
+                for (int j = 0; j < this.grid_width; j++) {
+                    if (grid[i][j] == State.ALIVE) {
+                        this.units[i][j].setBackground(this.player_colors.get(player));
+                    }
+                    else {
+                        this.units[i][j].setBackground(Color.WHITE);
+                    }
+                }
+            }
+        }
     }
 }
