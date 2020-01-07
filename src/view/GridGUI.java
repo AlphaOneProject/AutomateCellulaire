@@ -198,18 +198,21 @@ public class GridGUI extends JPanel {
     }
 
     public void updateGrid() {
+        for (int i = 0; i < this.grid_height; i++) {
+            for (int j = 0; j < this.grid_width; j++) {
+                this.units[i][j].setBackground(Color.WHITE);
+            }
+        }
         for (int player : this.players) {
             State[][] grid = player_manager.getPlayerGrid(player);
             for (int i = 0; i < this.grid_height; i++) {
                 for (int j = 0; j < this.grid_width; j++) {
-                    if (grid[i][j] == State.ALIVE) {
+                    if (grid[i][j] != State.DEAD) {
                         this.units[i][j].setBackground(this.player_colors.get(player));
-                    }
-                    else {
-                        this.units[i][j].setBackground(Color.WHITE);
                     }
                 }
             }
         }
+        game.next_turn();
     }
 }

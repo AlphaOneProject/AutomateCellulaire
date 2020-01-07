@@ -59,6 +59,7 @@ public class PlayerSetup extends JFrame {
         ArrayList<String> rulesArrayList = new ArrayList<String>();
         Collections.addAll(rulesArrayList, rulesList);
         jcbRule = new JComboBox<String>(rulesArrayList.toArray(rulesList));
+        jcbRule.setSelectedIndex(0);
         jpPlayerSelection.add(jcbRule);
         
         // content.add(jpPlayerSelection);

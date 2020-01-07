@@ -47,8 +47,9 @@ public class Neighborhood {
         for(int i = 0; i < this.size[0]; i++) {
             for(int j = 0; j < this.size[1]; j++) {
                 if(this.neighbors[j][i]) {
-                    deltas[local_count][0] = i - this.origin[0];
-                    deltas[local_count][1] = j - this.origin[1];
+                    // WIP
+                    //deltas[local_count][0] = i - this.origin[0];
+                    //deltas[local_count][1] = j - this.origin[1];
                     local_count++;
                 }
             }
