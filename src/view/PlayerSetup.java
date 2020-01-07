@@ -19,6 +19,9 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Frame used to setup all the players one by one, randomly.
+ */
 public class PlayerSetup extends JFrame {
 
     private static final long serialVersionUID = -7311347608273233951L;
@@ -31,6 +34,10 @@ public class PlayerSetup extends JFrame {
     private JButton btnPlayerValid;
     private JComboBox<String> jcbRule;
 
+    /**
+     * Constructor
+     * Creates a panel to setup a player, and a button to setup the next or launch GridGUI.
+     */
     public PlayerSetup() {
         super("Initialisation");
 
@@ -83,6 +90,10 @@ public class PlayerSetup extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Returns a random player that isn't already setup.
+     * @return random player id
+     */
     public int getRandomPlayer() {
         System.out.println("getrandomplayer");
         int res = -1;

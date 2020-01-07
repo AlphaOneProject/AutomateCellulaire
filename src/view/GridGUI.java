@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import model.State;
 
 /**
- * Grid used in the GUI
+ * Grid used for placing initial cells and playing the game.
  */
 public class GridGUI extends JPanel {
 
@@ -42,6 +42,11 @@ public class GridGUI extends JPanel {
 
     //Methods
 
+    /**
+     * Constructor
+     * @param grid_height height of the grid
+     * @param grid_width width of the grid
+     */
     public GridGUI(int grid_height, int grid_width) {
         super();
 
@@ -77,6 +82,10 @@ public class GridGUI extends JPanel {
         }
     }
 
+    /**
+     * Called when a unit is clicked.
+     * @param e JButton ActionEvent
+     */
     public void unitClickHandler(ActionEvent e) {
         JButton btn = (JButton)e.getSource();
 
@@ -96,6 +105,9 @@ public class GridGUI extends JPanel {
         }
     }
 
+    /**
+     * Updates players grids according to the inital cells placement.
+     */
     public void initCells() {
         State[][] cells;
         for (int player : this.players) {
@@ -114,6 +126,10 @@ public class GridGUI extends JPanel {
         }
     }   
 
+    /**
+     * Generates a random color used to visually identify a player.
+     * @return random player color
+     */
     public Color genPlayerColor() {
         Random rand = game.getRandom();
         int r = rand.nextInt((200 - 50) + 1) + 50;
@@ -122,6 +138,9 @@ public class GridGUI extends JPanel {
         return new Color(r, g, b);
     }
 
+    /**
+     * Disable user interaction and starts the game.
+     */
     private void startGame() {
         // Disable all units action listeners.
         for (int i = 0; i < this.grid_height; i++) {

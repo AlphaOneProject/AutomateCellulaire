@@ -8,10 +8,8 @@ import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import control.*;
-
 /**
- * GUI used to place the initial cells.
+ * Frame containing the grid.
  */
 public class GameGUI extends JFrame {
 
@@ -27,7 +25,7 @@ public class GameGUI extends JFrame {
     // Methods
 
     /**
-     * 
+     * Constructor
      * @param width width of the grid
      * @param height height of the grid
      */

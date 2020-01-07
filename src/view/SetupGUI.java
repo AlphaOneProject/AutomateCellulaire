@@ -13,15 +13,19 @@ import javax.swing.WindowConstants;
 
 import java.awt.FlowLayout;
 
+/**
+ * GUI used to setup the game.
+ */
 public class SetupGUI extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1285322896840177969L;
     private final int MAX_CELLS = 30;
     private Game gameInstance = Game.getInstance();
 
+    /**
+     * Constructor
+     * Frame used to setup the game.
+     */
     public SetupGUI() {
 
         super("Combats d'automates cellulaires");
