@@ -46,8 +46,7 @@ public class GameGUI extends JFrame {
         getContentPane().add(gridPanel, BorderLayout.CENTER);
         getContentPane().add(topPanel, BorderLayout.NORTH);
 
-        GridGUI grid = new GridGUI(this.width, this.height, 0);
-        grid.setCellColor(0, 0, grid.getPlayerColor());
+        GridGUI grid = new GridGUI(this.width, this.height);
         grid.setBounds(0, 0, 500, 500);
         getContentPane().add(grid);
 

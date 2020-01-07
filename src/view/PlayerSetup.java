@@ -84,10 +84,10 @@ public class PlayerSetup extends JFrame {
         int res = -1;
         boolean valid = false;
         Random randomNumber = Game.getInstance().getRandom();
-        int player = randomNumber.nextInt(playerManager.getPlayerCount());
         while (!valid)
         {
             System.out.println("pas valide");
+            int player = randomNumber.nextInt(playerManager.getPlayerCount());
             if (!this.alreadyPickedPlayers.contains(player)) 
             {
                 this.alreadyPickedPlayers.add(player);
