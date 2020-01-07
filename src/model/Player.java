@@ -34,6 +34,10 @@ public class Player {
         return this.name;
     }
     
+    public void setName(String new_name) {
+        this.name = new_name;
+    }
+    
     public Grid getGrid() {
         return this.grid;
     }
