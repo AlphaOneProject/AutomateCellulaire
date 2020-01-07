@@ -75,7 +75,7 @@ public class SetupGUI extends JFrame {
             // Writing into game control
             gameInstance.setWidth( (int)spinnerWidth.getValue() );
             gameInstance.setHeight( (int)spinnerHeight.getValue() );
-            gameInstance.setTurnNumber( (int)spinnerNbTurns.getValue() );
+            gameInstance.setMaxTurns( (int)spinnerNbTurns.getValue() );
             gameInstance.setStartingPlayers( (int)spinnerNbPlayers.getValue() );
             gameInstance.setStartCellsNumber( (int)spinnerNbStartCells.getValue() );
             // Launching player setup form

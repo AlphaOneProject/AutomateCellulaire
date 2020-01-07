@@ -71,6 +71,7 @@ public class PlayerSetup extends JFrame {
             else {
                 // validating player
                 int playerIdFromButton = Integer.parseInt(btnPlayerValid.getText().substring(btnPlayerValid.getText().length() - 1));
+                playerManager.setPlayerName(playerIdFromButton, jtfPlayer.getText());
                 playerManager.setPlayerRule(playerIdFromButton, jcbRule.getSelectedItem().toString());
 
                 // updating gui

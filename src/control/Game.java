@@ -11,6 +11,7 @@ public class Game {
     
     private static Game instance;
     private int turn_number;
+    private int max_turns;
     private int width;
     private int height;
     private Extension extension;
@@ -22,6 +23,7 @@ public class Game {
 
     private Game() {
         this.turn_number = 0;
+        this.max_turns = 10;
         this.width = 10;
         this.height = 10;
         this.extension = ExtensionFactory.getInstance().getExtension("pacman", null);
@@ -68,7 +70,15 @@ public class Game {
     
     public void setTurnNumber(int new_turn_number) {
             this.turn_number = new_turn_number;
-     }
+    }
+
+    public int getMaxTurns() {
+        return this.max_turns;
+    }
+
+    public void setMaxTurns(int new_max_turns) {
+        this.max_turns = new_max_turns;
+    }
 
     public int getStartCellsNumber() {
         return start_cells_number;

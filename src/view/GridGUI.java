@@ -18,6 +18,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import model.State;
 
@@ -57,7 +58,7 @@ public class GridGUI extends JPanel {
         this.player_manager = PlayerManager.getInstance();
         this.players = player_manager.getPlayerIds();
         this.player_colors = new Hashtable();
-        this.jlTitle = new JLabel("salut antoine");
+        this.jlTitle = new JLabel("jeu");
         this.jpGrid = new JPanel(new GridLayout(grid_height, grid_width));
         
         for (int i = 0; i < this.players.length; i++) {
@@ -97,7 +98,7 @@ public class GridGUI extends JPanel {
                         this.player_cursor -= this.players.length;
                         this.cells_left--;
                     }
-                else if (cells_left == 0) {
+                else if (this.cells_left == 0) {
                     initCells();
                     startGame();
                 }
@@ -106,9 +107,10 @@ public class GridGUI extends JPanel {
     }
 
     /**
-     * Updates players grids according to the inital cells placement.
+     * Updates players grids according to their cells placement.
      */
     public void initCells() {
+        System.out.println("init cells");
         State[][] cells;
         for (int player : this.players) {
             cells = new State[this.grid_height][this.grid_width];
@@ -142,6 +144,7 @@ public class GridGUI extends JPanel {
      * Disable user interaction and starts the game.
      */
     private void startGame() {
+        System.out.println("début du jeu");
         // Disable all units action listeners.
         for (int i = 0; i < this.grid_height; i++) {
             for (int j = 0; j < this.grid_width; j++) {
@@ -151,5 +154,50 @@ public class GridGUI extends JPanel {
             }
         }
         // Starting the simulation.
+        while (!isGameOver()) {
+            initCells();
+        }
+    }
+
+    public boolean isGameOver() {
+        boolean res = false;
+        // If the number of turns is achieved
+        if (this.game.getMaxTurns() == this.game.getTurnNumber()) {
+            res = true;
+        }
+        // If only one player has living automaton
+        else {
+            int number_of_players_alive = 0;
+            int winner;
+            for (int player : this.players) {
+                if (isPlayerAlive(player)) {
+                    number_of_players_alive ++;
+                }
+            }
+            if (number_of_players_alive == 0) {
+                res = true;
+                JOptionPane.showMessageDialog(null, "Egalité");
+            }
+            else if (number_of_players_alive == 1) {
+                res = true;
+                JOptionPane.showMessageDialog(null, "Joueur est gagnant");
+            }
+            else {
+                // Game not over
+            }
+        }
+        return res;
+    }
+
+    public boolean isPlayerAlive(int player_id) {
+        boolean res = false;
+        for (int i = 0; i < this.grid_height; i++) {
+            for (int j = 0; j < this.grid_width; j++) {
+                if (this.units[i][j].getBackground().equals(this.player_colors.get(player_id))) {
+                    res = true;
+                }
+            }
+        }
+        return res;
     }
 }
