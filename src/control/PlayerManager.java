@@ -59,6 +59,7 @@ public class PlayerManager {
     }
     
     public void setPlayerGrid(int id, State[][] new_states) {
+        System.out.println(this.get(id).getName());
         this.get(id).getGrid().setStates(new_states);
     }
     

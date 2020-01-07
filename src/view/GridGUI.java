@@ -47,7 +47,7 @@ public class GridGUI extends JPanel {
         super();
 
         this.grid_height = grid_height;
-        this.grid_height = grid_width;
+        this.grid_width = grid_width;
         this.game = Game.getInstance();
         this.cells_left = game.getStartCellsNumber();
         this.player_manager = PlayerManager.getInstance();
