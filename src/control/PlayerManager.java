@@ -5,29 +5,29 @@ import model.Player;
 import model.State;
 
 public class PlayerManager {
-    
+
     // Attributes.
-    
+
     private static PlayerManager instance;
     private ArrayList<Player> players;
-    
+
     // Methods.
-    
+
     private PlayerManager() {
         this.players = new ArrayList<Player>();
     }
-    
+
     public static PlayerManager getInstance() {
         if (instance == null) instance = new PlayerManager();
         return instance;
     }
-    
+
     public int add(String name) {
         int new_id = Player.getNextId();
         this.players.add(new Player(name, Game.getInstance().getWidth(), Game.getInstance().getHeight()));
         return new_id;
     }
-    
+
     public void remove(int id) {
         boolean found = false;
         int cursor = 0;
@@ -40,7 +40,7 @@ public class PlayerManager {
         if (found) players.remove(cursor);
         else throw new IllegalArgumentException("Remove Player: Player number " + id + " does not exists.");
     }
-    
+
     private Player get(int id) {
         boolean found = false;
         int cursor = 0;
@@ -53,20 +53,20 @@ public class PlayerManager {
         if (found) return players.get(cursor);
         else throw new IllegalArgumentException("Get Player: Player number " + id + " does not exists.");
     }
-    
+
     public State[][] getPlayerGrid(int id) {
         return this.get(id).getGrid().getStates();
     }
-    
+
     public void setPlayerGrid(int id, State[][] new_states) {
         System.out.println(this.get(id).getName());
         this.get(id).getGrid().setStates(new_states);
     }
-    
+
     public int getPlayerCount() {
         return this.players.size();
     }
-    
+
     public int[] getPlayerIds() {
         int[] ids = new int[this.players.size()];
         for (int i = 0; i < this.players.size(); i++) {
@@ -74,23 +74,23 @@ public class PlayerManager {
         }
         return ids;
     }
-    
+
     public String getPlayerName(int id) {
         return this.get(id).getName();
     }
-    
+
     public void setPlayerName(int id, String new_name) {
         this.get(id).setName(new_name);
     }
-    
+
     public String getPlayerRule(int id) {
         return this.get(id).getRule().getName();
     }
-    
+
     public void setPlayerRule(int id, String rule_name) {
         this.get(id).setRule(RuleManager.getInstance().getRule(rule_name));
     }
-    
+
     public void next_turn() {
         for (Player player : this.players) {
             player.nextTurn();
@@ -112,7 +112,7 @@ public class PlayerManager {
             }
         }
     }
-    
+
     protected void updateGrid() {
         for (Player player : this.players) {
             player.setGridSize(Game.getInstance().getWidth(), Game.getInstance().getHeight());
