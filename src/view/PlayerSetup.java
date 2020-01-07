@@ -57,6 +57,7 @@ public class PlayerSetup extends JFrame {
             int player = randomNumber.nextInt(gameInstance.getStartingPlayers());
             if (!alreadyPickedPlayers.contains(player)) 
             {
+                System.out.println("valid");
                 alreadyPickedPlayers.add(player);
                 valid = true;
                 jpPlayersSelection.removeAll();
@@ -89,6 +90,7 @@ public class PlayerSetup extends JFrame {
                     }
                 });
                 jpPlayerSelection.add(btnPlayerValid);
+                update(getGraphics());
             }
         }
     }
