@@ -105,7 +105,6 @@ public class GridGUI extends JPanel {
      * Updates players grids according to their cells placement.
      */
     public void initCells() {
-        System.out.println("init cells");
         State[][] cells;
         for (int player : this.players) {
             cells = new State[this.grid_height][this.grid_width];
@@ -139,7 +138,6 @@ public class GridGUI extends JPanel {
      * Disable user interaction and starts the game.
      */
     private void startGame() {
-        System.out.println("début du jeu");
         // Disable all units action listeners.
         for (int i = 0; i < this.grid_height; i++) {
             for (int j = 0; j < this.grid_width; j++) {
@@ -204,6 +202,7 @@ public class GridGUI extends JPanel {
             }
         }
         for (int player : this.players) {
+            System.out.println("GridGUI:207:player"+player+" is "+player_manager.getPlayerName(player));
             State[][] grid = player_manager.getPlayerGrid(player);
             for (int i = 0; i < this.grid_height; i++) {
                 for (int j = 0; j < this.grid_width; j++) {

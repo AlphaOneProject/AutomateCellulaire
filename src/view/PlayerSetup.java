@@ -64,13 +64,14 @@ public class PlayerSetup extends JFrame {
         
         this.btnPlayerValid = new JButton("Valider joueur "+player);
         btnPlayerValid.addActionListener( e -> {
-            if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){
+            if (alreadyPickedPlayers.size() > playerManager.getPlayerCount()){
                 setVisible(false);
                 GameGUI g = new GameGUI(gameInstance.getWidth(), gameInstance.getHeight());
             }  
             else {
                 // validating player
                 int playerIdFromButton = Integer.parseInt(btnPlayerValid.getText().substring(btnPlayerValid.getText().length() - 1));
+                System.out.println("PlayerSetp:74:"+playerIdFromButton+" devient "+jtfPlayer.getText());
                 playerManager.setPlayerName(playerIdFromButton, jtfPlayer.getText());
                 playerManager.setPlayerRule(playerIdFromButton, jcbRule.getSelectedItem().toString());
 
