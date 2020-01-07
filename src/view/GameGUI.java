@@ -16,10 +16,8 @@ public class GameGUI extends JFrame {
     // Attributes
 
     private static final long serialVersionUID = 4078728479243413794L;
-    private JLabel JLabelCellsLeft;
     private int width;
     private int height;
-    private ArrayList<GridGUI> gridList = new ArrayList<GridGUI>();
     private JPanel gridPanel;
 
     // Methods

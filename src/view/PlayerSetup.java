@@ -61,7 +61,6 @@ public class PlayerSetup extends JFrame {
         jcbRule = new JComboBox<String>(rulesArrayList.toArray(rulesList));
         jpPlayerSelection.add(jcbRule);
         
-        // content.add(jpPlayerSelection);
         this.btnPlayerValid = new JButton("Valider joueur "+player);
         btnPlayerValid.addActionListener( e -> {
             if (alreadyPickedPlayers.size() == playerManager.getPlayerCount()){

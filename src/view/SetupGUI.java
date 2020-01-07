@@ -87,6 +87,7 @@ public class SetupGUI extends JFrame {
             gameInstance.setMaxTurns( (int)spinnerNbTurns.getValue() );
             gameInstance.setStartingPlayers( (int)spinnerNbPlayers.getValue() );
             gameInstance.setStartCellsNumber( (int)spinnerNbStartCells.getValue() );
+            ExtensionFactory.getInstance().getExtension(jcbExtension.getSelectedItem(), argument);
             // Launching player setup form
             for (int i = 0; i < (int)spinnerNbPlayers.getValue(); i++) {
                 PlayerManager.getInstance().add("Joueur "+(i+1));
