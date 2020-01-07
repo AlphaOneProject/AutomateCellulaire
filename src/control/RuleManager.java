@@ -3,7 +3,6 @@ package control;
 import java.util.ArrayList;
 
 import model.Rule;
-import model.State;
 
 public class RuleManager {
     
@@ -18,6 +17,7 @@ public class RuleManager {
         this.rules = new ArrayList<Rule>();
         this.rules.add(RuleFactory.getInstance().getRule("game_of_life"));
         this.rules.add(RuleFactory.getInstance().getRule("fredkin"));
+        this.rules.add(RuleFactory.getInstance().getRuleECA(110));
     }
     
     public static RuleManager getInstance() {
