@@ -25,7 +25,7 @@ public class RuleManager {
         return instance;
     }
     
-    private String getRule(int id) {
+    public String getRule(int id) {
         boolean found = false;
         int cursor = 0;
         while (!found && cursor < rules.size()) {
@@ -36,6 +36,19 @@ public class RuleManager {
         }
         if (found) return rules.get(cursor).getName();
         else throw new IllegalArgumentException("Get Rule: Rule number " + id + " does not exists.");
+    }
+    
+    public Rule getRule(String rule_name) {
+        boolean found = false;
+        int cursor = 0;
+        while (!found && cursor < rules.size()) {
+            if (rules.get(cursor).getName() == rule_name) {
+                found = true;
+            }
+            else cursor++;
+        }
+        if (found) return rules.get(cursor);
+        else throw new IllegalArgumentException("Get Rule: Rule number " + rule_name + " does not exists.");
     }
     
     public String[] getRules() {
